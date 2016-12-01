@@ -1,0 +1,20 @@
+version: '2'
+services:
+  server:
+    environment:
+      - PORT=3000
+      - PGHOST=postgres
+      - PGPORT=5432
+    image: 'palaogn/tictactoe'
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'
+    ports:
+      - '3000:3000'
+      - '8080:8080'
+    depends_on:
+      - 'postgres'
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword

@@ -9,5 +9,16 @@
     "port": 5432,
     "max": 10,
     "idleTimeoutMillis": 30000
+  },
+  "production": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "mysecretpassword",
+    "host": {"ENV": "PG_HOST"},
+    "database": "postgres",
+    "schema": "postgres",
+    "port": 5432,
+    "max": 10,
+    "idleTimeoutMillis": 30000
   }
 }
