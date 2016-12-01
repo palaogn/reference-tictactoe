@@ -3,6 +3,8 @@
 echo Cleaning...
 rm -rf ./dist
 
+echo Building...
+npm run build --silent
 
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
