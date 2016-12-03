@@ -45,6 +45,7 @@ _EOF_
 
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
+cp ./runMigratedb.sh ./build/
 
 cd build
 echo Building docker image

@@ -6,4 +6,3 @@ RUN npm install --silent
 RUN ls
 EXPOSE 3000
 ENV NODE_PATH .
-CMD ["node","run.js"]

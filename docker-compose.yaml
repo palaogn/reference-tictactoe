@@ -14,7 +14,9 @@ services:
       - '8080:8080'
     links:
       - 'postgres'
+    depends_on:
+      - postgres
   postgres:
     image: postgres
     environment:
-      - 'POSTGRES_PASSWORD=mysecretpassword'
+      - POSTGRES_PASSWORD=mysecretpassword
