@@ -1,11 +1,5 @@
 #!/bin/bash
 
-echo Cleaning...
-rm -rf ./build
-
-mkdir build
-echo Building...
-npm run build --silent
 
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
@@ -17,6 +11,7 @@ export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
 
 echo Building app
+
 npm build
 
 rc=$?
@@ -25,28 +20,14 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
+npm run build
 
-cat > ./dist/githash.txt <<_EOF_
-$GIT_COMMIT
-_EOF_
-
-cat > ./dist/public/version.html << _EOF_
-<!doctype html>
-<head>
-   <title>App version information</title>
-</head>
-<body>
-   <span>Origin:</span> <span>$GITHUB_URL</span>
-   <span>Revision:</span> <span>$GIT_COMMIT</span>
-   <p>
-   <div><a href="$GITHUB_URL/commits/$GIT_COMMIT">History of current version</a></div>
-</body>
-_EOF_
-
-
+#Copying files to build folder
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
 cp ./runMigratedb.sh ./build/
+
+
 
 cd build
 echo Building docker image

@@ -1,10 +1,16 @@
 version: '2'
 services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - 5432:5432
   server:
     environment:
-      - 'PORT=3000'
-      - 'PGHOST=postgres'
-      - 'PGPORT=5432'
+      - PORT=3000
+      - PGHOST=postgres
+      - PGPORT=5432
     image: 'palaogn/tictactoe'
     build:
       context: '.'
@@ -12,11 +18,5 @@ services:
     ports:
       - '3000:3000'
       - '8080:8080'
-    links:
-      - 'postgres'
     depends_on:
       - postgres
-  postgres:
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=mysecretpassword
