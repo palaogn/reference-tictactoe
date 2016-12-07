@@ -11,7 +11,7 @@ services:
       - PORT=3000
       - PGHOST=postgres
       - PGPORT=5432
-    image: 'palaogn/tictactoe'
+    image: palaogn/tictactoe:${GIT_COMMIT}
     build:
       context: '.'
       dockerfile: 'Dockerfile'
