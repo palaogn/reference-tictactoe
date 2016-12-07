@@ -20,7 +20,7 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-#Createsagithas.txt file that contains the latest git head
+#Create .env file that contains the latest git head
 cat > ./.env <<_EOF_
 GIT_COMMIT=$GIT_COMMIT
 _EOF_
@@ -29,9 +29,6 @@ _EOF_
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
 cp -r ./scripts ./build
-#cp ./bin/runMigratedb.sh ./build/
-#cp ./bin/cleanDocker.sh ./build/
-#cp ./bin/dockerBuild.sh ./build/
 
 
 #build docker image
