@@ -9,7 +9,7 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
-#Builds the app
+# Builds the app
 echo Building app
 npm run build
 
@@ -25,16 +25,15 @@ cat > ./.env <<_EOF_
 GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
-#Copying files to build folder
+#Copying necessary files to build folder
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
-cp -r ./scripts ./build
+cp -r ./bin ./build
 
 
-#build docker image
+#goes into the build folder and builds docker image
 cd build
 echo Building docker image
-
 docker build -t palaogn/tictactoe:$GIT_COMMIT .
 
 #checks if the docker build failed or not

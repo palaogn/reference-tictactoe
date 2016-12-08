@@ -1,11 +1,5 @@
 version: '2'
 services:
-  postgres:
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=mysecretpassword
-    ports:
-      - 5432:5432
   server:
     environment:
       - PORT=3000
@@ -20,3 +14,9 @@ services:
       - '8080:8080'
     depends_on:
       - postgres
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - 5432:5432

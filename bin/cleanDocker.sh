@@ -1,5 +1,6 @@
 #!/bin/bash
-# Delete all containers
+
+# Delete all docker containers
 docker rm $(docker ps -a -q)
-# Delete all images
+# Delete all docker images
 docker rmi $(docker images -q)
