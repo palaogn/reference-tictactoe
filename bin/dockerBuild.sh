@@ -5,6 +5,7 @@ npm install --silent
 #npm install -g nodemon --silent
 #npm install -g create-react-app --silent
 
+echo installing npm packages inside the client
 cd client
 npm run install --silent
 cd ..
