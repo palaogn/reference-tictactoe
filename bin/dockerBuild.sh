@@ -2,12 +2,10 @@
 
 echo installing npm packages
 npm install --silent
-npm install -g nodemon --silent
-npm install -g create-react-app --silent
 
 echo installing npm packages inside the client
 cd client
-npm run install --silent
+npm install --silent
 cd ..
 
 #if the docker image doesn't have a label, than this sets it's value to the current Head commit
