@@ -2,8 +2,8 @@
 
 echo installing npm packages
 npm install --silent
-npm install -g nodemon --silent
-npm install -g create-react-app --silent
+#npm install -g nodemon --silent
+#npm install -g create-react-app --silent
 
 #if the docker image doesn't have a label, than this sets it's value to the current Head commit
 if [ -z "$GIT_COMMIT" ]; then
