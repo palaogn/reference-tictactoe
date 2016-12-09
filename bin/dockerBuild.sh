@@ -5,6 +5,10 @@ npm install --silent
 #npm install -g nodemon --silent
 #npm install -g create-react-app --silent
 
+cd client
+npm run install --silent
+cd ..
+
 #if the docker image doesn't have a label, than this sets it's value to the current Head commit
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
