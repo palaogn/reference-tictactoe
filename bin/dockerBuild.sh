@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo installing npm packages
 npm install --silent
 
@@ -39,7 +40,7 @@ cp ./package.json ./build/
 cp -r ./bin ./build
 
 
-#goes into the build folder and builds docker image
+# goes into the build folder and builds docker image
 cd build
 echo Building docker image
 docker build -t palaogn/tictactoe:$GIT_COMMIT .

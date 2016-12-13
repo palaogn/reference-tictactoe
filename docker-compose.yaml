@@ -5,10 +5,8 @@ services:
       - PORT=3000
       - PGHOST=postgres
       - PGPORT=5432
+      - NODE_ENV=production
     image: palaogn/tictactoe:${GIT_COMMIT}
-    build:
-      context: '.'
-      dockerfile: 'Dockerfile'
     ports:
       - '3000:3000'
       - '8080:8080'
