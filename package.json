@@ -41,6 +41,6 @@
     "migratedb": "db-migrate --config ./server/database.json -e dev --migrations-dir ./server/migrations up",
     "migrateproddb": "db-migrate --config ./server/database.json -e production --migrations-dir ./server/migrations up",
     "startdockerdb": "docker run -p 5432:5432 --name pg2 -e POSTGRES_PASSWORD=mysecretpassword -d postgres",
-    "connectdockerdb": "docker run -it --rm --link pg3:postgres postgres psql -h postgres -U postgres"
+    "connectdockerdb": "docker run -it --rm --link pg2:postgres postgres psql -h postgres -U postgres"
   }
 }
