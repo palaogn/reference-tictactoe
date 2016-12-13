@@ -39,13 +39,6 @@ cp ./Dockerfile ./build/
 cp ./package.json ./build/
 cp -r ./bin ./build
 
-#run tests
-npm run test
-
-cd client
-npm run test
-cd ..
-
 # goes into the build folder and builds docker image
 cd build
 echo Building docker image
