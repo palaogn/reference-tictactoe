@@ -91,7 +91,7 @@ describe('join game command', function () {
     });
 
 
-    it('should emit game joined event...', function () {
+    it('should emit game joined event', function () {
 
         given = [{
             type: "GameCreated",
@@ -125,10 +125,44 @@ describe('join game command', function () {
 
     });
 
-    it('should emit FullGameJoinAttempted event when game full..implement this', function () {
+    fit('should emit FullGameJoinAttempted event when game full', function () {
 
-        expect(true).toBe(false);
+      given = [{
+          type: "GameCreated",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29"
+      },
+      {
+          type: "GameJoined",
+          user: {
+              userName: "Gummi"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29",
+          side:'O'
+      }
+      ];
+      when =
+      {
+          type: "JoinGame",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29"
+      };
+      then = [
+          {
+              type: "FullGameJoinAttempted",
+              user: {
+                  userName: "Pala"
+              },
+              name: "TheFirstGame",
+              timeStamp: "2014-12-02T11:30:29"
+          }
+      ];
     });
 });
-
-
