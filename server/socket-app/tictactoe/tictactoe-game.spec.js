@@ -165,4 +165,49 @@ describe('join game command', function () {
           }
       ];
     });
+
+    it('should emit MovePlaced on first game move', function () {
+
+      given = [{
+          type: "GameCreated",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29"
+      },
+      {
+          type: "GameJoined",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29",
+          side:'X'
+      }
+      ];
+      when =
+      {
+          type: "PlaceMove",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [0,0]
+      };
+      then = [
+          {
+              type: "MovePlaced",
+              user: {
+                  userName: "Pala"
+              },
+              name: "TheFirstGame",
+              timeStamp: "2014-12-02T11:30:29",
+              side: "X",
+              board: ["X", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y"]
+          }
+      ];
+    });
 });

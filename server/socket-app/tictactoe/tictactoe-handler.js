@@ -43,13 +43,31 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
+                        if(gameState.howManyMoves===9){
+                            eventHandler( [{
+                                gameId: cmd.gameId,
+                                type: "Draw",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp
+                            }]);
+
+                        }
+                        eventHandler([{
+                          gameId: cmd.gameId,
+                          type: "MovePlaced",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          side: "X",
+                          board: ["X", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y"]
+                        }]);
 
                         // Check here for conditions which prevent command from altering state
-
-                        gameState.processEvents(events);
+                        //gameState.processEvents(events);
 
                         // Check here for conditions which may warrant additional events to be emitted.
-                        eventHandler(events);
+                      //  eventHandler(events);
                     }
                 };
 
@@ -61,4 +79,3 @@ module.exports = function(injected){
         }
     }
 };
-
