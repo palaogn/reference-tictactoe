@@ -5,10 +5,7 @@ module.exports = function (injected) {
     return function (history) {
 
         var gamefull=false;
-        var numberOfMoves=0;
-        var board = [ ["Y", "Y", "Y"],
-                      ["Y", "Y", "Y"],
-                      ["Y", "Y", "Y"] ];
+
 
         console.debug("History", history);
 
@@ -17,8 +14,16 @@ module.exports = function (injected) {
               gamefull=true;
             }
 
+            if(event.type==="GameCreated"){
+              board = [ ["Y", "Y", "Y"],
+                        ["Y", "Y", "Y"],
+                        ["Y", "Y", "Y"] ];
+              var numberOfMoves = 0;
+            }
+
             if(event.type==="MovePlaced"){
-              howManyMoves=howManyMoves+1;
+              numberOfMoves=numberOfMoves+1;
+              board = event.board;
             }
         }
 

@@ -43,7 +43,10 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
-                        if(gameState.board[cmd.coordinate[0]][cmd.coordinate[1]] === null && gameState.numberOfMoves <=9) {
+                      console.debug(cmd.coordinate)
+                        var currentCellState = gameState.board[cmd.coordinate[0]][cmd.coordinate[1]];
+
+                        if(currentCellState === "Y" && gameState.numberOfMoves <= 9) {
                            gameState.board[cmd.coordinate[0]][cmd.coordinate[1]] = cmd.side;
                           eventHandler([{
                             gameId: cmd.gameId,
@@ -55,17 +58,17 @@ module.exports = function(injected){
                             board: gameState.board
                           }]);
                         }
-
-                        if(gameState.howManyMoves===9){
-                            eventHandler( [{
-                                gameId: cmd.gameId,
-                                type: "Draw",
-                                user: cmd.user,
-                                name: cmd.name,
-                                timeStamp: cmd.timeStamp
-                            }]);
-
+                        else if(currentCellState === "X" || currentCellState === "O") {
+                          eventHandler([{
+                            gameId: cmd.gameId,
+                            type: "IllegalMove",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp,
+                            side: cmd.side
+                          }]);
                         }
+
 
 
                         // Check here for conditions which prevent command from altering state

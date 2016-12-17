@@ -206,9 +206,64 @@ describe('join game command', function () {
               name: "TheFirstGame",
               timeStamp: "2014-12-02T11:30:29",
               side: "X",
-              board: ["X", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y"]
+              board: [["X", "Y", "Y"], ["Y", "Y", "Y"], ["Y", "Y", "Y"]]
           }
       ];
     });
+    it('should emit IllegalMove when square is already occupied', function () {
+
+      given = [{
+          type: "GameCreated",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29"
+      },
+      {
+          type: "GameJoined",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29",
+          side:'X'
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [0,0],
+          board: [["X", "Y", "Y"], ["Y", "Y", "Y"], ["Y", "Y", "Y"]]
+      }
+      ];
+      when =
+      {
+          type: "PlaceMove",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'O',
+          coordinate: [0,0]
+      };
+      then = [
+          {
+              type: "IllegalMove",
+              user: {
+                  userName: "TheGuy"
+              },
+              name: "TheFirstGame",
+              timeStamp: "2014-12-02T11:30:29",
+              side: "O"
+          }
+      ];
+    });
+  
 
 });
