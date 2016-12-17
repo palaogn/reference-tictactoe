@@ -5,7 +5,11 @@ module.exports = function (injected) {
     return function (history) {
 
         var gamefull=false;
-        var howManyMoves=0;
+        var numberOfMoves=0;
+        var board = [ ["Y", "Y", "Y"],
+                      ["Y", "Y", "Y"],
+                      ["Y", "Y", "Y"] ];
+
         console.debug("History", history);
 
         function processEvent(event) {
@@ -26,11 +30,21 @@ module.exports = function (injected) {
           return gamefull;
         }
 
+        function board() {
+          return board;
+        }
+
+        function numberOfMoves() {
+          return numberOfMoves;
+        }
+
         processEvents(history);
 
         return {
             gameFull: gameFull,
-            processEvents: processEvents
+            processEvents: processEvents,
+            board: board,
+            numberOfMoves: numberOfMoves
         }
     };
 };

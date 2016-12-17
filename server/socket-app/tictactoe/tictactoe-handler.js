@@ -43,6 +43,19 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
+                        if(gameState.board[cmd.coordinate[0]][cmd.coordinate[1]] === null && gameState.numberOfMoves <=9) {
+                           gameState.board[cmd.coordinate[0]][cmd.coordinate[1]] = cmd.side;
+                          eventHandler([{
+                            gameId: cmd.gameId,
+                            type: "MovePlaced",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp,
+                            side: cmd.side,
+                            board: gameState.board
+                          }]);
+                        }
+
                         if(gameState.howManyMoves===9){
                             eventHandler( [{
                                 gameId: cmd.gameId,
@@ -53,15 +66,7 @@ module.exports = function(injected){
                             }]);
 
                         }
-                        eventHandler([{
-                          gameId: cmd.gameId,
-                          type: "MovePlaced",
-                          user: cmd.user,
-                          name: cmd.name,
-                          timeStamp: cmd.timeStamp,
-                          side: "X",
-                          board: ["X", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y"]
-                        }]);
+
 
                         // Check here for conditions which prevent command from altering state
                         //gameState.processEvents(events);

@@ -210,4 +210,5 @@ describe('join game command', function () {
           }
       ];
     });
+
 });
