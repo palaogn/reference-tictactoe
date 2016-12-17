@@ -45,8 +45,18 @@ module.exports = function(injected){
                     "PlaceMove": function(cmd){
                       console.debug(cmd.coordinate)
                         var currentCellState = gameState.board[cmd.coordinate[0]][cmd.coordinate[1]];
+                        var XturnToPlay = (gameState.numberOfMoves % 2 === 0);
 
-                        if(currentCellState === "Y" && gameState.numberOfMoves <= 9) {
+                        if(XturnToPlay && cmd.side === "O" || !XturnToPlay && cmd.side === "X") {
+                          eventHandler([{
+                            gameId: cmd.gameId,
+                            type: "NotYourMove",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp
+                          }]);
+                        }
+                        else if(currentCellState === "Y" && gameState.numberOfMoves <= 9) {
                            gameState.board[cmd.coordinate[0]][cmd.coordinate[1]] = cmd.side;
                           eventHandler([{
                             gameId: cmd.gameId,
@@ -68,8 +78,6 @@ module.exports = function(injected){
                             side: cmd.side
                           }]);
                         }
-
-
 
                         // Check here for conditions which prevent command from altering state
                         //gameState.processEvents(events);

@@ -18,11 +18,14 @@ module.exports = function (injected) {
               board = [ ["Y", "Y", "Y"],
                         ["Y", "Y", "Y"],
                         ["Y", "Y", "Y"] ];
-              var numberOfMoves = 0;
+              numberOfMoves = 0;
             }
 
+
             if(event.type==="MovePlaced"){
-              numberOfMoves=numberOfMoves+1;
+              numberOfMoves= numberOfMoves + 1;
+              console.debug("number of moves: ");
+              console.debug(numberOfMoves);
               board = event.board;
             }
         }
