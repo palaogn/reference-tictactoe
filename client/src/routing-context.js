@@ -16,7 +16,11 @@ function routingContext(injected){
     var socketURI;
     if(environment==='development' || environment==='test'){
         socketURI='http://localhost:8080'
-    } else {
+    }
+    else if(environment==='production'){
+      socketURI='82.221.49.173'
+    }
+    else {
         socketURI='/'
     }
 
