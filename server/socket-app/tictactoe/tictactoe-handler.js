@@ -43,7 +43,6 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
-                      console.debug(cmd.coordinate)
                         var currentCellState = gameState.board[cmd.coordinate[0]][cmd.coordinate[1]];
                         var XturnToPlay = (gameState.numberOfMoves % 2 === 0);
 
@@ -55,8 +54,10 @@ module.exports = function(injected){
                             name: cmd.name,
                             timeStamp: cmd.timeStamp
                           }]);
+                          return;
                         }
-                        else if(currentCellState === "Y" && gameState.numberOfMoves <= 9) {
+
+                        if(currentCellState === "Y" && gameState.numberOfMoves <= 9) {
                            gameState.board[cmd.coordinate[0]][cmd.coordinate[1]] = cmd.side;
                           eventHandler([{
                             gameId: cmd.gameId,
@@ -79,11 +80,28 @@ module.exports = function(injected){
                           }]);
                         }
 
+
+
                         // Check here for conditions which prevent command from altering state
                         //gameState.processEvents(events);
 
                         // Check here for conditions which may warrant additional events to be emitted.
                       //  eventHandler(events);
+                    },
+                    "CheckIfWinner": function(cmd){
+
+                      if(gameState.hasWon == true){
+                        eventHandler([{
+                          gameId: cmd.gameId,
+                          type: "GameWon",
+                          user: cmd.user,
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          side: cmd.side,
+                          board: gameState.board
+                        }]);
+                        return;
+                      }
                     }
                 };
 
