@@ -102,6 +102,18 @@ module.exports = function(injected){
                         }]);
                         return;
                       }
+                    },
+                    "CheckIfDraw": function(cmd){
+                      if(gameState.numberOfMoves >= 9){
+                        eventHandler([{
+                          gameId: cmd.gameId,
+                          type: "Draw",
+                          name: cmd.name,
+                          timeStamp: cmd.timeStamp,
+                          board: gameState.board
+                        }]);
+                        return;
+                      }
                     }
                 };
 
