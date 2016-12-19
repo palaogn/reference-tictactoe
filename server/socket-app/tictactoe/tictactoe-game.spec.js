@@ -565,5 +565,148 @@ describe('join game command', function () {
       ];
     });
 
+    it('Should not emit game draw if won on last move', function () {
+
+      given = [{
+          type: "GameCreated",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29"
+      },
+      {
+          type: "GameJoined",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29",
+          side:'X'
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [0,0],
+          board: [["X", "Y", "Y"], ["Y", "Y", "Y"], ["Y", "Y", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'O',
+          coordinate: [1,0],
+          board: [["X", "Y", "Y"], ["O", "Y", "Y"], ["Y", "Y", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [0,1],
+          board: [["X", "X", "Y"], ["O", "Y", "Y"], ["Y", "Y", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'O',
+          coordinate: [1,1],
+          board: [["X", "X", "Y"], ["O", "O", "Y"], ["Y", "Y", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [1,2],
+          board: [["X", "X", "Y"], ["O", "O", "X"], ["Y", "Y", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'O',
+          coordinate: [2,0],
+          board: [["X", "X", "Y"], ["O", "O", "X"], ["O", "Y", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [2,1],
+          board: [["X", "X", "Y"], ["O", "O", "X"], ["O", "X", "Y"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'O',
+          coordinate: [2,2],
+          board: [["X", "X", "Y"], ["O", "O", "X"], ["O", "X", "O"]]
+      },
+      {
+          type: "MovePlaced",
+          user: {
+              userName: "Pala"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          side:'X',
+          coordinate: [0,2],
+          board: [["X", "X", "X"], ["O", "O", "X"], ["O", "X", "O"]]
+      }
+      ];
+      when =
+      {
+        type: "CheckIfDraw",
+        user: {
+            userName: "Pala"
+        },
+        name: "TheFirstGame",
+        timeStamp: "2014-12-02T11:30:29",
+        side:'X',
+        board: [["X", "X", "X"], ["O", "O", "X"], ["O", "X", "O"]]
+      };
+      then = [
+          {
+              type: "GameWon",
+              user: {
+                  userName: "Pala"
+              },
+              name: "TheFirstGame",
+              timeStamp: "2014-12-02T11:30:29",
+              side:'X',
+              board: [["X", "X", "X"], ["O", "O", "X"], ["O", "X", "O"]]
+          }
+      ];
+    });
 
 });

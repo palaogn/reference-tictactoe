@@ -104,7 +104,7 @@ module.exports = function(injected){
                       }
                     },
                     "CheckIfDraw": function(cmd){
-                      if(gameState.numberOfMoves >= 9){
+                      if(gameState.hasWon == false && gameState.numberOfMoves >= 9){
                         eventHandler([{
                           gameId: cmd.gameId,
                           type: "Draw",
