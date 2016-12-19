@@ -4,27 +4,17 @@
 
 Outline what script files you created and the purpose of each file. Each file should be commented. This could be
 
-- dockerBuild
+- dockerBuild - builds the project and makes a docker container and pushes the docker image to Docker hub. The image has a tag from the git commit.
 
-- cleanDocker
+- cleanDocker - deletes all docker containers and images.
 
-- runMigrateDb
+- runMigrateDb - runs migrate db for production
 
 
 
 ## Testing & logic
 
-Outline what tests you created.
-
-- UnitTests, server logic TDD (Git commit log)
-
-- API Acceptance test - fluent API
-
-- Load test loop
-
-- UI TDD
-
-- Is the game playable?
+I made UnitTests using a event based approach.
 
 
 
@@ -37,38 +27,7 @@ Did you create a data migration.
 
 
 ## Jenkins
-
-Do you have the following Jobs and what happens in each Job:
-
-- Commit Stage
-
-- Acceptance Stage
-
-- Capacity Stage
-
-- Other
-
-
-
-Did you use any of the following features in Jenkins?
-
-- Schedule or commit hooks
-
-- Pipeline
-
-- Jenkins file
-
-- Test reports
-
-- Other
-
-
-
-## Monitoring
-
-Did you do any monitoring?
-
-- URL to monitoring tool. Must be open or include username and pass.
+Each push on master branch on Git triggers a build on Jenkins that builds a docker image and pushes it to docker hub. If the build is successful than Jenkins deploys the image on the AWS machine.
 
 
 
